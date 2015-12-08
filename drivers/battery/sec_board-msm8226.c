@@ -37,7 +37,7 @@ extern int check_sm5502_jig_state(void);
 static struct battery_data_t samsung_battery_data[] = {
   /* SDI battery data (High voltage 4.35V) */
   {
-#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN)
+#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN) || defined(CONFIG_MACH_AFYONLTE_MTR)
     .RCOMP0 = 0x55,
     .RCOMP_charging = 0x55,
     .temp_cohot = -75,
@@ -122,12 +122,12 @@ static void * samsung_battery_data;
 static enum qpnp_vadc_channels temp_channel;
 static struct sec_fuelgauge_info *sec_fuelgauge =  NULL;
 
-#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN)
-#define TEMP_HIGH_THRESHOLD_EVENT  702
+#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN) || defined(CONFIG_MACH_AFYONLTE_MTR)
+#define TEMP_HIGH_THRESHOLD_EVENT  635
 #define TEMP_HIGH_RECOVERY_EVENT   462
 #define TEMP_LOW_THRESHOLD_EVENT   (-33)
 #define TEMP_LOW_RECOVERY_EVENT    10
-#define TEMP_HIGH_THRESHOLD_NORMAL 612
+#define TEMP_HIGH_THRESHOLD_NORMAL 545
 #define TEMP_HIGH_RECOVERY_NORMAL  462
 #define TEMP_LOW_THRESHOLD_NORMAL  (-45)
 #define TEMP_LOW_RECOVERY_NORMAL   (-4)
@@ -345,7 +345,7 @@ static struct sec_fuelgauge_info *sec_fuelgauge =  NULL;
 #define TEMP_LOW_RECOVERY_LPM      0
 #endif
 
-#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN)
+#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN) || defined(CONFIG_MACH_AFYONLTE_MTR)
 static sec_bat_adc_table_data_t temp_table[] = {
   {26390, 800},
   {26780, 750},
@@ -934,7 +934,7 @@ void adc_exit(struct sec_battery_info *battery)
 
 bool sec_bat_check_jig_status(void)
 {
-#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN)
+#if defined(CONFIG_MACH_AFYONLTE_TMO) || defined(CONFIG_MACH_AFYONLTE_CAN) || defined(CONFIG_MACH_AFYONLTE_MTR)
 	return check_jig_state();
 #elif defined(CONFIG_SEC_MATISSE_PROJECT) || defined(CONFIG_SEC_MILLET_PROJECT)
 	return check_sm5502_jig_state();
